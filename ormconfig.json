@@ -1,0 +1,20 @@
+{
+   "name": "default",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5433,
+    "username": "postgres",
+    "password": "3112",
+    "database": "StudyXP_DB",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+       "./src/database/model/*.ts"
+    ],
+    "migrations": [
+       "./src/database/migrations/*.ts"
+    ],
+    "subscribers": [
+       "./src/subscriber/**/*.ts"
+    ]
+ }

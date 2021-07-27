@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getRepository } from 'typeorm'
+import { Any, getRepository } from 'typeorm'
 import Tarefa from './../model/Tarefa';
 
 interface TarefaDTO {
@@ -7,6 +7,11 @@ interface TarefaDTO {
     descricao: string,
     classe: string,
     limite_data: Date,
+    xp: number,
+}
+
+interface TarefaParaDeletar {
+    id: number,
 }
 
 class TarefaController {
@@ -25,6 +30,47 @@ class TarefaController {
         await tarefaRepository.save(tarefaToCreated);
 
         return res.json(tarefaToCreated)
+    }
+
+    async deleteAll(req: Request, res: Response){
+        let mensagemDeStatus = {
+            'status': '',
+            'message': '',
+        }
+
+        const tarefaRepository = getRepository(Tarefa)
+        await tarefaRepository.query('DELETE FROM tarefas').then((result) => {
+            if (result[1] === 0){
+                mensagemDeStatus.status = 'Erro';
+                mensagemDeStatus.message = 'Não há elementos na tabela';
+            }else {
+                mensagemDeStatus.status = 'Sucesso';
+                mensagemDeStatus.message = 'Foram removidos ['+ result[1] + '] registros da tabela';
+            }
+        }) 
+
+        return res.json(mensagemDeStatus)
+    }
+
+    async deleteUnique(req: Request, res: Response){
+        let mensagemDeStatus = {
+            'status': '',
+            'message': '',
+        }
+
+        const tarefaRepository = getRepository(Tarefa)
+        const tarefaRequest: TarefaParaDeletar = req.body
+        await tarefaRepository.query('DELETE FROM tarefas WHERE id =' + tarefaRequest.id).then((result) => {
+            if (result[1] === 0){
+                mensagemDeStatus.status = 'Erro';
+                mensagemDeStatus.message = 'Não foi encontrado o elemento na tabela';
+            }else {
+                mensagemDeStatus.status = 'Sucesso';
+                mensagemDeStatus.message = 'Registro apagado com sucesso';
+            }
+        }) 
+
+        return res.json(mensagemDeStatus)
     }
 }
 

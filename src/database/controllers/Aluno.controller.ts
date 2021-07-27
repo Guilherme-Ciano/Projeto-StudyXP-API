@@ -12,6 +12,10 @@ interface AlunoDTO {
     level:number;
 }
 
+interface alunoParaDeletar {
+    id: number
+}
+
 class AlunoController {
     async index(req: Request, res: Response) {
         const alunoRepository = getRepository(Aluno)
@@ -28,6 +32,47 @@ class AlunoController {
         await alunoRepository.save(alunoToCreated);
 
         return res.json(alunoToCreated);
+    }
+
+    async deleteAll(req: Request, res: Response){
+        let mensagemDeStatus = {
+            'status': '',
+            'message': '',
+        }
+
+        const alunoRepository = getRepository(Aluno)
+        await alunoRepository.query('DELETE FROM alunos').then((result) => {
+            if (result[1] === 0){
+                mensagemDeStatus.status = 'Erro';
+                mensagemDeStatus.message = 'Não há elementos na tabela';
+            }else {
+                mensagemDeStatus.status = 'Sucesso';
+                mensagemDeStatus.message = 'Foram removidos ['+ result[1] + '] registros da tabela';
+            }
+        }) 
+
+        return res.json(mensagemDeStatus)
+    }
+
+    async deleteUnique(req: Request, res: Response){
+        let mensagemDeStatus = {
+            'status': '',
+            'message': '',
+        }
+
+        const alunoRepository = getRepository(Aluno)
+        const alunoRequest: alunoParaDeletar = req.body
+        await alunoRepository.query('DELETE FROM alunos WHERE id =' + alunoRequest.id).then((result) => {
+            if (result[1] === 0){
+                mensagemDeStatus.status = 'Erro';
+                mensagemDeStatus.message = 'Não foi encontrado o elemento na tabela';
+            }else {
+                mensagemDeStatus.status = 'Sucesso';
+                mensagemDeStatus.message = 'Registro apagado com sucesso';
+            }
+        }) 
+
+        return res.json(mensagemDeStatus)
     }
 }
 

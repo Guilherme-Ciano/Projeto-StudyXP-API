@@ -15,7 +15,7 @@ sessionLog.post('/', async (req, res) => {
     // Verificação
     const { email, password } = req.body;
     const alunoRepository = getRepository(Aluno);
-    let aluno = await alunoRepository.findOne({ email } && { password });
+    let aluno = await alunoRepository.findOne({where: { email }} && {where: { password }});
     
     if (!aluno) {
         const professorRepository = getRepository(Professor);
@@ -23,7 +23,8 @@ sessionLog.post('/', async (req, res) => {
 
         let responseProf = {
             data: professor,
-            hash: hashCod
+            hash: hashCod,
+            type: 'P'
         }
 
         if (professor) {
@@ -36,7 +37,8 @@ sessionLog.post('/', async (req, res) => {
     }
     let responseAluno = {
         data: aluno,
-        hash: hashCod
+        hash: hashCod,
+        type: 'A'
     }
     return res.json(responseAluno);
 })

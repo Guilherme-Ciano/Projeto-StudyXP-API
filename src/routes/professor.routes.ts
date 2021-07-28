@@ -11,6 +11,9 @@ const professorController = new ProfessorController()
 professoresRoutes.get('/index', professorController.index)
 professoresRoutes.post('/create', professorController.create)
 
+professoresRoutes.get('/clearall', professorController.deleteAll)
+professoresRoutes.post('/clearunique', professorController.deleteUnique)
+
 professoresRoutes.post('/img', multer(multerConfig).single('file'), (req, res) => {
     console.log(req.file);
     return res.json({status: "Success"})

@@ -74,6 +74,27 @@ class AlunoController {
 
         return res.json(mensagemDeStatus)
     }
+
+    async update (req: Request, res: Response) {
+        let mensagemDeStatus = {
+            'status': '',
+            'message': '',
+        }
+
+        const alunoRepository = getRepository(Aluno)
+        const alunoRequest: AlunoDTO = req.body
+        await alunoRepository.query('UPDATE alunos  WHERE id =' + alunoRequest.ra).then((result) => {
+            if (result[1] === 0){
+                mensagemDeStatus.status = 'Erro';
+                mensagemDeStatus.message = 'Não foi encontrado o elemento na tabela';
+            }else {
+                mensagemDeStatus.status = 'Sucesso';
+                mensagemDeStatus.message = 'Registro alterado com sucesso';
+            }
+        }) 
+
+        return res.json(mensagemDeStatus)
+    }
 }
 
 export default AlunoController

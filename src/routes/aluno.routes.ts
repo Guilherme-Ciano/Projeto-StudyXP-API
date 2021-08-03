@@ -9,7 +9,7 @@ const alunoController = new AlunoController()
 
 alunosRoutes.get('/index', alunoController.index)
 alunosRoutes.post('/create', alunoController.create)
-
+alunosRoutes.post('/update', alunoController.update)
 alunosRoutes.get('/clearall', alunoController.deleteAll)
 alunosRoutes.post('/clearunique', alunoController.deleteUnique)
 

@@ -8,5 +8,7 @@ tarefaRoutes.get('/index', tarefaController.index)
 tarefaRoutes.post('/create', tarefaController.create)
 tarefaRoutes.get('/clearall', tarefaController.deleteAll)
 tarefaRoutes.post('/clearunique', tarefaController.deleteUnique)
+tarefaRoutes.post('/concluirtarefa', tarefaController.concluirTarefa)
+tarefaRoutes.get('/tarefaspendentes', tarefaController.TarefasPendentes)
 
 export default tarefaRoutes

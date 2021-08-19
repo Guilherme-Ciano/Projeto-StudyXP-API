@@ -12,6 +12,17 @@ interface AlunoDTO {
     level:number;
 }
 
+interface AtualizarAluno {
+    id: number;
+    nome: string;
+    email: string;
+    password: string;
+    phone: string;
+    grade: number;
+    ra:string;
+    level:number;
+}
+
 interface alunoParaDeletar {
     id: number
 }
@@ -77,21 +88,19 @@ class AlunoController {
 
     async update (req: Request, res: Response) {
         let mensagemDeStatus = {
-            'status': '',
-            'message': '',
+            'status': 'Sucesso',
+            'message': 'Cadastro Atualizado',
         }
 
-        const alunoRepository = getRepository(Aluno)
-        const alunoRequest: AlunoDTO = req.body
-        await alunoRepository.query('UPDATE alunos  WHERE id =' + alunoRequest.ra).then((result) => {
-            if (result[1] === 0){
-                mensagemDeStatus.status = 'Erro';
-                mensagemDeStatus.message = 'Não foi encontrado o elemento na tabela';
-            }else {
-                mensagemDeStatus.status = 'Sucesso';
-                mensagemDeStatus.message = 'Registro alterado com sucesso';
-            }
-        }) 
+        const id = req.query.id;
+        const alunoRepository = getRepository(Aluno);
+
+        let alunoRequest: Aluno = req.body;
+        let alunoExists: any = await alunoRepository.findOne({ where: { id } });
+
+        if (alunoExists && id && alunoRequest) {
+            await alunoRepository.update(alunoExists.id, alunoRequest);  
+        }
 
         return res.json(mensagemDeStatus)
     }

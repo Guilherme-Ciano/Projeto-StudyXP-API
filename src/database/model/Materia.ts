@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, Pr
 import Aluno from "./Aluno";
 import Escola from "./Escola";
 import Professor from './Professor';
+import Tarefa from "./Tarefa";
 
 
 @Entity("materias")
@@ -22,6 +23,10 @@ export default class Materia {
     @ManyToMany(()=> Professor)
     @JoinColumn()
     professor: Professor[];
+
+    @ManyToMany(()=> Tarefa)
+    @JoinColumn()
+    tarefas: Tarefa[];
 
     @ManyToOne(()=> Escola, escola => escola.materia)
     @JoinColumn()

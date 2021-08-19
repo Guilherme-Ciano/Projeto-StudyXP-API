@@ -32,6 +32,10 @@ export class TabelaTarefas1621698189398 implements MigrationInterface {
                             type: "int",
                         },
                         {
+                            name: "flag",
+                            type: "varchar",
+                        },
+                        {
                             name: "limite_data",
                             type: "timestamp",
                         },

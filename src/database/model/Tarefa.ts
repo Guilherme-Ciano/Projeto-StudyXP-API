@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, TableForeignKey, UpdateDateColumn } from "typeorm";
 import Aluno from './Aluno'
 import Professor from './Professor';
 
@@ -20,13 +20,16 @@ export default class Tarefa {
     classe: string;
 
     @Column()
+    flag: string;
+
+    @Column()
     xp: number;
 
     @OneToMany(() => Aluno, aluno => aluno.tarefas)
     @JoinColumn()
     aluno: Aluno[];
 
-    @OneToOne(() => Professor)
+    @OneToOne(() => Professor, professor => professor.id)
     @JoinColumn()
     professor: Professor;
 

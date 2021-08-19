@@ -36,6 +36,12 @@ export class TabelaProfessor1620429873382 implements MigrationInterface {
                             type: "varchar",
                         },
                         {
+                            name: "foto_perfil",
+                            type: "varchar",
+                            default: 0,
+                            isNullable: true,
+                        },
+                        {
                             name: "created_at",
                             type: "timestamp",
                             default: "now()",

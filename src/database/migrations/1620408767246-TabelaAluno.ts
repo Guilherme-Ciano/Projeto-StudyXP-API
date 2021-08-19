@@ -40,9 +40,20 @@ export class TabelaAluno1620408767246 implements MigrationInterface {
                             type: "int",
                         },
                         {
-                            name: "level",
+                            name: "level_number",
                             type: "int",
                             default: 0,
+                        },
+                        {
+                            name: "level_xp",
+                            type: "int",
+                            default: 0,
+                        },
+                        {
+                            name: "foto_perfil",
+                            type: "varchar",
+                            default: 0,
+                            isNullable: true,
                         },
                         {
                             name: "created_at",

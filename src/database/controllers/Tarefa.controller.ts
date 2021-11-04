@@ -8,7 +8,7 @@ interface TarefaDTO {
     classe: string,
     limite_data: Date,
     xp: number,
-    profId: string,
+    //profId: string,
 }
 
 interface TarefaParaDeletar {
@@ -27,7 +27,7 @@ class TarefaController {
         const tarefaRepository = getRepository(Tarefa)
         const tarefaRequest: TarefaDTO = req.body;
         const tarefaToCreated: Tarefa = tarefaRepository.create(tarefaRequest);
-        await tarefaRepository.createQueryBuilder('tarefas').innerJoin('tarefas.professorId', tarefaRequest.profId)
+        //await tarefaRepository.createQueryBuilder('tarefas').innerJoin('tarefas.professorId', tarefaRequest.profId)
 
         await tarefaRepository.save(tarefaToCreated);
 
@@ -82,7 +82,30 @@ class TarefaController {
         return res.json(mostraTodasTarefasPendentes)
     }
 
+    async TarefasConcluidas(req: Request, res: Response){
+        const tarefaRepository = getRepository(Tarefa)
+        const mostraTodasTarefasPendentes = await tarefaRepository.query("SELECT * FROM tarefas WHERE flag = 'concluida'");
+
+        return res.json(mostraTodasTarefasPendentes)
+    }
+
     async concluirTarefa(req: Request, res: Response){
+        let mensagemDeStatus = {
+            'status': 'Sucesso',
+            'message': 'Cadastro Atualizado',
+        }
+
+        const id = req.query.id;
+        const tarefaRepository = getRepository(Tarefa);
+        let tarefaRequest: Tarefa = req.body;
+        let tarefaExists: any = await tarefaRepository.findOne({ where: { id } });
+        if (tarefaExists && id && tarefaRequest) {
+            await tarefaRepository.update(tarefaExists.id, tarefaRequest);  
+        }
+        return res.json(mensagemDeStatus)
+    }
+
+    async voltarTarefa(req: Request, res: Response){
         let mensagemDeStatus = {
             'status': 'Sucesso',
             'message': 'Cadastro Atualizado',

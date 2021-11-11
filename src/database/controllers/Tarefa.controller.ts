@@ -8,6 +8,7 @@ interface TarefaDTO {
   classe: string;
   limite_data: Date;
   xp: number;
+  fileLink: string;
   //profId: string,
 }
 

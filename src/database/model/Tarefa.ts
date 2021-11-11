@@ -1,41 +1,54 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, TableForeignKey, UpdateDateColumn } from "typeorm";
-import Aluno from './Aluno'
-import Professor from './Professor';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  TableForeignKey,
+  UpdateDateColumn,
+} from "typeorm";
+import Aluno from "./Aluno";
+import Professor from "./Professor";
 
 @Entity("tarefas")
 export default class Tarefa {
-    @PrimaryGeneratedColumn("increment")
-    id: number;
+  @PrimaryGeneratedColumn("increment")
+  id: number;
 
-    @Column()
-    titulo: string;
+  @Column()
+  titulo: string;
 
-    @Column()
-    descricao: string;
+  @Column()
+  descricao: string;
 
-    @Column()
-    limite_data: Date;
+  @Column()
+  limite_data: Date;
 
-    @Column()
-    classe: string;
+  @Column()
+  classe: string;
 
-    @Column()
-    flag: string;
+  @Column()
+  flag: string;
 
-    @Column()
-    xp: number;
+  @Column()
+  xp: number;
 
-    @OneToMany(() => Aluno, aluno => aluno.tarefas)
-    @JoinColumn()
-    aluno: Aluno[];
+  @Column()
+  fileLink: string;
 
-    @OneToOne(() => Professor, professor => professor.id)
-    @JoinColumn()
-    professor: Professor;
+  @OneToMany(() => Aluno, (aluno) => aluno.tarefas)
+  @JoinColumn()
+  aluno: Aluno[];
 
-    @CreateDateColumn()
-    created_at: Date;
+  @OneToOne(() => Professor, (professor) => professor.id)
+  @JoinColumn()
+  professor: Professor;
 
-    @UpdateDateColumn()
-    updated_at: Date;
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

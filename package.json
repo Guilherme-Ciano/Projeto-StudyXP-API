@@ -4,6 +4,10 @@
   "main": "server.ts",
   "author": "@Guilherme-Ciano",
   "license": "MIT",
+  "engines": {
+    "npm": "6.14.13",
+    "node": "14.17.3"
+},
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",

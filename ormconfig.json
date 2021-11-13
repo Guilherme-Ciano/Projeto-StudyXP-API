@@ -1,11 +1,11 @@
 {
    "name": "default",
     "type": "postgres",
-    "host": "localhost",
-    "port": 5433,
-    "username": "postgres",
-    "password": "3112",
-    "database": "StudyXP_DB",
+    "host": "ec2-44-198-236-169.compute-1.amazonaws.com",
+    "port": 5432,
+    "username": "cspduzzadkhhya",
+    "password": "f3e4a9ca929ed11800f41ef198a1e9634c97feac254a05786640a3ccb04a2916",
+    "database": "d72rb0em7mnb9k",
     "synchronize": true,
     "logging": false,
     "entities": [

@@ -2,15 +2,18 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "outDir": "./dist",
-    // "rootDir": "./src",
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "allowJs": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+
+  "include": [
+    "src/"
+  ]
 }

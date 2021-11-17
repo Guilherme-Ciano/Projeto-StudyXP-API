@@ -1,6 +1,4 @@
 import { Router } from "express";
-import FotosController from "../database/controllers/Fotos.controller";
-import Foto from "../database/model/Foto";
 import AlunoController from "./../database/controllers/Aluno.controller";
 import tarefaRoutes from "./tarefa.routes";
 import ImageKit from "imagekit";
@@ -13,7 +11,6 @@ const imagekit = new ImageKit({
 
 const alunosRoutes = Router();
 const alunoController = new AlunoController();
-const fotoController = new FotosController();
 
 alunosRoutes.get("/index", alunoController.index);
 alunosRoutes.post("/create", alunoController.create);

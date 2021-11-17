@@ -12,7 +12,7 @@
     "start": "node dist/server.js",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "build": "sucrase src/ -d ./dist --transforms typescript,imports"
+    "build": "sucrase -d ./dist --transforms typescript,imports"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

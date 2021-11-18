@@ -2,13 +2,19 @@
   "name": "default",
   "type": "postgres",
   "host": "ec2-44-198-236-169.compute-1.amazonaws.com",
-  "port": 5432,
-  "username": "cspduzzadkhhya",
-  "password": "f3e4a9ca929ed11800f41ef198a1e9634c97feac254a05786640a3ccb04a2916",
   "database": "d72rb0em7mnb9k",
+  "username": "cspduzzadkhhya",
+  "port": 5432,
+  "password": "f3e4a9ca929ed11800f41ef198a1e9634c97feac254a05786640a3ccb04a2916",
   "synchronize": true,
-  "logging": false,
+  "logging": true,
   "entities": ["./src/database/model/*.ts"],
   "migrations": ["./src/database/migrations/*.ts"],
-  "subscribers": ["./src/subscriber/**/*.ts"]
+  "subscribers": ["./src/subscriber/**/*.ts"],
+  "ssl": true,
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  }
 }

@@ -1,5 +1,9 @@
-import { createConnection } from 'typeorm'
+import { createConnection } from "typeorm";
 
-createConnection().then((con: any ) => {
-    console.log("| Conexão estabelecida com: " + con.driver.database + "\n|----------------------------------------|");
-})
+createConnection().then((con: any) => {
+  console.log(
+    "| Conexão estabelecida com: " +
+      con.driver.database +
+      "\n|----------------------------------------|"
+  );
+});

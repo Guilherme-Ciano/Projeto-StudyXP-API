@@ -9,8 +9,7 @@
     "node": "14.17.3"
   },
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "start": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "build": "sucrase ./src -d ./dist --transforms typescript,imports && cp ./ormconfig.json ./dist/",
     "reset": "clear && delete ./dist/"
